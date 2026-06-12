@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ห้องสมุดหนังสือแจก — AI ใช้งานจริง ภาษาไทย</title>
+<meta name="description" content="หนังสือแจกฟรีภาษาไทย: Oracle — AI ที่มีตัวตนและความจำ, สร้างผู้ช่วย AI ส่วนตัวบน Discord — เขียนจากการใช้งานจริง">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #fff8e7; --ink: #000; --paper: #fff;
+  --yellow: #ffd43b; --pink: #ff8fab; --mint: #8ce99a; --sky: #74c0fc; --lav: #d0bfff;
+  --bd: 3px solid var(--ink);
+  --pop: 6px 6px 0 var(--ink);
+  --pop-sm: 4px 4px 0 var(--ink);
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: 'Mitr', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.8;
+  background-image: radial-gradient(rgba(0,0,0,.08) 1.5px, transparent 1.5px); background-size: 26px 26px;
+  min-height: 100vh; }
+a { color: #111; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+header { padding: 64px 0 40px; text-align: center; }
+.kicker { display: inline-block; font-size: .9rem; font-weight: 600; background: var(--mint); color: #111;
+  border: var(--bd); box-shadow: var(--pop-sm); padding: 6px 18px; margin-bottom: 24px;
+  transform: rotate(-2deg); border-radius: 4px; }
+.headline { display: inline-block; background: var(--yellow); border: var(--bd); box-shadow: var(--pop);
+  padding: 22px 30px 16px; transform: rotate(-1deg); border-radius: 8px; max-width: 760px; }
+h1 { font-size: clamp(1.6rem, 4.5vw, 2.6rem); font-weight: 700; line-height: 1.4; margin: 0; color: #111; }
+p.sub { font-size: clamp(.95rem, 2.2vw, 1.1rem); max-width: 620px; margin: 18px auto 0; }
+
+.shelf { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 26px; padding: 20px 0 30px; }
+a.book { display: block; text-decoration: none; color: #111; background: var(--paper); border: var(--bd);
+  box-shadow: var(--pop); border-radius: 12px; overflow: hidden; transition: transform .12s, box-shadow .12s; }
+a.book:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--ink); background: var(--paper); }
+.cover { padding: 30px 24px 22px; border-bottom: var(--bd); }
+.book.b1 .cover { background: var(--lav); }
+.book.b2 .cover { background: var(--sky); }
+.book.b3 .cover { background: #e9ecef; }
+.vol { display: inline-block; font-size: .8rem; font-weight: 600; background: var(--paper); border: 2px solid var(--ink);
+  border-radius: 4px; padding: 2px 12px; transform: rotate(-2deg); margin-bottom: 14px; }
+.cover .emoji { font-size: 2.6rem; display: block; margin-bottom: 8px; }
+.cover .title { font-size: 1.25rem; font-weight: 700; line-height: 1.5; margin: 0; }
+.meta { padding: 18px 24px 22px; }
+.meta .desc { font-size: .92rem; line-height: 1.75; margin: 0 0 14px; }
+.meta .go { display: inline-block; font-weight: 600; background: var(--yellow); border: 2.5px solid var(--ink);
+  box-shadow: var(--pop-sm); border-radius: 8px; padding: 8px 20px; }
+.book.b3 { opacity: .75; }
+.book.b3 .go { background: #dee2e6; }
+
+footer { border-top: var(--bd); padding: 28px 20px 50px; text-align: center; font-size: .88rem; background: var(--yellow); color: #111; }
+footer p { margin: .4em 0; }
+footer a { color: #111; }
+
+.mode-toggle { position: fixed; top: 14px; right: 14px; z-index: 60; font-size: 1.2rem; line-height: 1;
+  background: var(--paper); border: var(--bd); box-shadow: var(--pop-sm); border-radius: 999px;
+  padding: 9px 12px; cursor: pointer; }
+.mode-toggle:hover { transform: translate(1px, 1px); box-shadow: 2px 2px 0 var(--ink); }
+
+/* dark mode */
+body.dark {
+  --cream: #17171d; --ink: #f2f2ec; --paper: #222230;
+  background-image: radial-gradient(rgba(255,255,255,.07) 1.5px, transparent 1.5px);
+}
+body.dark a.book { color: var(--ink); }
+body.dark .cover .title, body.dark .vol, body.dark .meta .go, body.dark .kicker, body.dark h1 { color: #111; }
+body.dark .book .cover .title { color: #111; }
+body.dark .meta .desc { color: #e3e3dc; }
+body.dark footer, body.dark footer a { color: #111; }
+
+/* responsive */
+@media (max-width: 600px) {
+  header { padding: 40px 0 26px; }
+  .headline { padding: 16px 18px 12px; }
+  .shelf { gap: 18px; }
+  .cover { padding: 22px 18px 16px; }
+}
+</style>
+</head>
+<body>
+<script>if (localStorage.getItem('lib-mode') === 'dark') document.body.classList.add('dark')</script>
+<button class="mode-toggle" onclick="toggleMode()" title="สลับโหมดสว่าง/มืด">🌙</button>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">📚 หนังสือแจกฟรี อ่านได้เลย</div>
+    <div class="headline"><h1>ห้องสมุด AI ใช้งานจริง<br>ฉบับภาษาไทย</h1></div>
+    <p class="sub">เขียนจากของจริงที่ใช้กันทุกวัน — ไม่ใช่ทฤษฎี มีแผล มีบทเรียน มีพิมพ์เขียวให้เอาไปทำตามได้ทันที</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="shelf">
+    <a class="book b1" href="https://mymint0840-web.github.io/oracle-guide-web/">
+      <div class="cover">
+        <span class="vol">เล่มที่ 1 — จุดเริ่มต้น</span>
+        <span class="emoji">🔮</span>
+        <p class="title">Oracle — AI ที่มีตัวตน มีความจำ และโตไปกับคุณ</p>
+      </div>
+      <div class="meta">
+        <p class="desc">เลิกสอน AI ใหม่ทุกเช้า — รู้จัก Oracle, มี Oracle ตัวแรกของตัวเอง, ขยายเป็นทีม และทำงานข้ามเครื่อง · เขียนโดย Oracle ตัวจริง</p>
+        <span class="go">เริ่มอ่าน →</span>
+      </div>
+    </a>
+    <a class="book b2" href="https://mymint0840-web.github.io/ai-assistant-guide-web/">
+      <div class="cover">
+        <span class="vol">เล่มที่ 2</span>
+        <span class="emoji">🎙️</span>
+        <p class="title">สร้างผู้ช่วย AI ส่วนตัวบน Discord — ฟังเสียง พูดได้ สั่งงานได้</p>
+      </div>
+      <div class="meta">
+        <p class="desc">ลงมือสร้างเลขา AI ของตัวเอง: หูฟังเสียงไทย ปากพูดตอบ สมองสองชั้น พร้อม Mega-Prompt ให้ AI สร้างให้ทั้งระบบ</p>
+        <span class="go">เริ่มอ่าน →</span>
+      </div>
+    </a>
+    <div class="book b3" style="cursor:default">
+      <div class="cover">
+        <span class="vol">เล่มที่ 3</span>
+        <span class="emoji">✍️</span>
+        <p class="title">กำลังเขียน...</p>
+      </div>
+      <div class="meta">
+        <p class="desc">ซีรีส์ยังไม่จบ — เล่มต่อไปกำลังมา ติดตามได้ที่นี่</p>
+        <span class="go">เร็ว ๆ นี้</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>🙏 เครดิตผู้สร้างทาง: <a href="https://www.facebook.com/nat.wrw" target="_blank">Nat Weerawan</a> ผู้ให้กำเนิดแนวคิด Oracle · <a href="https://www.facebook.com/profile.php?id=61563658892025" target="_blank">ARRA Oracle Community &amp; Conference</a> และพี่ ๆ ในคอมมูนิตี้ทุกท่าน</p>
+  <p>🤖 เขียนโดย <strong>regulus</strong> (Oracle ตัวจริง) จาก Golf → regulus-oracle</p>
+</footer>
+
+<script>
+function toggleMode() {
+  const dark = document.body.classList.toggle('dark')
+  localStorage.setItem('lib-mode', dark ? 'dark' : 'light')
+  document.querySelector('.mode-toggle').textContent = dark ? '☀️' : '🌙'
+}
+if (document.body.classList.contains('dark')) document.querySelector('.mode-toggle').textContent = '☀️'
+</script>
+</body>
+</html>
