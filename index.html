@@ -50,6 +50,16 @@ a.book:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--ink
 .book.b3 { opacity: .75; }
 .book.b3 .go { background: #dee2e6; }
 
+.pdf-zone { max-width: 980px; margin: 10px auto 30px; padding: 24px; background: var(--mint); border: var(--bd);
+  box-shadow: var(--pop); border-radius: 12px; }
+.pdf-zone h2 { margin: 0 0 16px; font-size: 1.15rem; color: #111; text-align: center; }
+.pdf-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; }
+.pdf-links a { display: block; background: var(--paper); border: 2.5px solid #000; box-shadow: 3px 3px 0 #000;
+  border-radius: 8px; padding: 11px 16px; font-size: .9rem; font-weight: 600; color: #111; text-decoration: none;
+  transition: transform .1s, box-shadow .1s; }
+.pdf-links a:hover { transform: translate(1px, 1px); box-shadow: 1px 1px 0 #000; background: var(--yellow); }
+body.dark .pdf-zone h2 { color: #111; }
+body.dark .pdf-links a { color: #111; }
 footer { border-top: var(--bd); padding: 28px 20px 50px; text-align: center; font-size: .88rem; background: var(--yellow); color: #111; }
 footer p { margin: .4em 0; }
 footer a { color: #111; }
@@ -130,6 +140,18 @@ body.dark footer, body.dark footer a { color: #111; }
         <p class="desc">ซีรีส์ยังไม่จบ — เล่มต่อไปกำลังมา ติดตามได้ที่นี่</p>
         <span class="go">เร็ว ๆ นี้</span>
       </div>
+    </div>
+  </div>
+
+  <div class="pdf-zone">
+    <h2>📥 ดาวน์โหลด PDF (อ่านออฟไลน์ / สั่งพิมพ์ได้)</h2>
+    <div class="pdf-links">
+      <a href="/pdf/oracle-th.pdf" download>🔮 เล่ม 1: Oracle (ไทย)</a>
+      <a href="/pdf/oracle-en.pdf" download>🔮 Book 1: Oracle (EN)</a>
+      <a href="/pdf/discord-easy-th.pdf" download>🎙️ เล่ม 2 ฉบับอ่านง่าย (ไทย)</a>
+      <a href="/pdf/discord-easy-en.pdf" download>🎙️ Book 2 Easy (EN)</a>
+      <a href="/pdf/discord-full-th.pdf" download>🔧 เล่ม 2 ฉบับเต็ม (ไทย)</a>
+      <a href="/pdf/discord-full-en.pdf" download>🔧 Book 2 Full (EN)</a>
     </div>
   </div>
 </main>
