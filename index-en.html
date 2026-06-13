@@ -54,12 +54,32 @@ a.book:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--ink
   box-shadow: var(--pop); border-radius: 12px; }
 .pdf-zone h2 { margin: 0 0 16px; font-size: 1.15rem; color: #111; text-align: center; }
 .pdf-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; }
-.pdf-links a { display: block; background: var(--paper); border: 2.5px solid #000; box-shadow: 3px 3px 0 #000;
-  border-radius: 8px; padding: 11px 16px; font-size: .9rem; font-weight: 600; color: #111; text-decoration: none;
+.pdf-links .dl { display: block; width: 100%; text-align: left; font-family: inherit; cursor: pointer;
+  background: var(--paper); border: 2.5px solid #000; box-shadow: 3px 3px 0 #000;
+  border-radius: 8px; padding: 11px 16px; font-size: .9rem; font-weight: 600; color: #111;
   transition: transform .1s, box-shadow .1s; }
-.pdf-links a:hover { transform: translate(1px, 1px); box-shadow: 1px 1px 0 #000; background: var(--yellow); }
+.pdf-links .dl:hover { transform: translate(1px, 1px); box-shadow: 1px 1px 0 #000; background: var(--yellow); }
 body.dark .pdf-zone h2 { color: #111; }
-body.dark .pdf-links a { color: #111; }
+body.dark .pdf-links .dl { color: #111; }
+/* download confirm modal */
+.modal-bg { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.55);
+  align-items: center; justify-content: center; padding: 20px; }
+.modal-bg.open { display: flex; }
+.modal { background: var(--paper); border: var(--bd); box-shadow: var(--pop); border-radius: 14px;
+  max-width: 420px; width: 100%; padding: 26px 24px; text-align: center; color: #111; }
+.modal-emoji { font-size: 2.4rem; }
+.modal h3 { margin: 8px 0 6px; font-size: 1.15rem; color: #111; }
+.modal-pages { display: inline-block; font-size: .8rem; font-weight: 600; background: var(--sky);
+  border: 2px solid #000; border-radius: 999px; padding: 2px 14px; margin-bottom: 12px; }
+.modal-desc { font-size: .9rem; line-height: 1.7; color: #333; margin: 0 0 22px; }
+.modal-btns { display: flex; gap: 12px; }
+.modal-btns > * { flex: 1; font-family: inherit; font-size: .95rem; font-weight: 700; padding: 11px; cursor: pointer;
+  border: 2.5px solid #000; border-radius: 9px; box-shadow: 3px 3px 0 #000; text-decoration: none;
+  transition: transform .1s, box-shadow .1s; }
+.modal-btns > *:hover { transform: translate(1px,1px); box-shadow: 1px 1px 0 #000; }
+.m-cancel { background: #fff; color: #111; }
+.m-go { background: var(--mint); color: #111; display: flex; align-items: center; justify-content: center; }
+@media (max-width: 480px) { .modal-btns { flex-direction: column; } }
 footer { border-top: var(--bd); padding: 28px 20px 50px; text-align: center; font-size: .88rem; background: var(--yellow); color: #111; }
 footer p { margin: .4em 0; }
 footer a { color: #111; }
@@ -146,15 +166,28 @@ body.dark footer, body.dark footer a { color: #111; }
   <div class="pdf-zone">
     <h2>📥 Download PDF (read offline / print)</h2>
     <div class="pdf-links">
-      <a href="/pdf/oracle-th.pdf" download>🔮 Book 1: Oracle (TH)</a>
-      <a href="/pdf/oracle-en.pdf" download>🔮 Book 1: Oracle (EN)</a>
-      <a href="/pdf/discord-easy-th.pdf" download>🎙️ Book 2 Easy (TH)</a>
-      <a href="/pdf/discord-easy-en.pdf" download>🎙️ Book 2 Easy (EN)</a>
-      <a href="/pdf/discord-full-th.pdf" download>🔧 Book 2 Full (TH)</a>
-      <a href="/pdf/discord-full-en.pdf" download>🔧 Book 2 Full (EN)</a>
+      <button class="dl" data-file="/pdf/oracle-th.pdf" data-title="🔮 Book 1: Oracle (TH)" data-pages="9 pages" data-desc="Meet Oracle from scratch — identity and permanent memory, the 5 principles, building your first one, teams and cross-machine work. (Thai)">🔮 Book 1: Oracle (TH)</button>
+      <button class="dl" data-file="/pdf/oracle-en.pdf" data-title="🔮 Book 1: Oracle (EN)" data-pages="10 pages" data-desc="Meet Oracle from scratch — an AI with identity and permanent memory, the 5 principles, building your first one, teams and cross-machine work.">🔮 Book 1: Oracle (EN)</button>
+      <button class="dl" data-file="/pdf/discord-easy-th.pdf" data-title="🎙️ Book 2 Easy (TH)" data-pages="5 pages" data-desc="A beginner-friendly intro to a Discord AI assistant — clear analogies, see how it works in real life. (Thai)">🎙️ Book 2 Easy (TH)</button>
+      <button class="dl" data-file="/pdf/discord-easy-en.pdf" data-title="🎙️ Book 2 Easy (EN)" data-pages="6 pages" data-desc="A beginner-friendly intro to a Discord AI assistant — clear analogies, real-life examples, no tech background needed.">🎙️ Book 2 Easy (EN)</button>
+      <button class="dl" data-file="/pdf/discord-full-th.pdf" data-title="🔧 Book 2 Full (TH)" data-pages="20 pages" data-desc="The full hands-on build — ears, a voice, a two-tier brain, the Mega-Prompt, and every trap we hit. (Thai)">🔧 Book 2 Full (TH)</button>
+      <button class="dl" data-file="/pdf/discord-full-en.pdf" data-title="🔧 Book 2 Full (EN)" data-pages="21 pages" data-desc="The full hands-on build — ears, a voice, a two-tier brain, the Mega-Prompt, and every trap we hit along the way.">🔧 Book 2 Full (EN)</button>
     </div>
   </div>
 </main>
+
+<div class="modal-bg" id="dlModal" onclick="if(event.target===this)closeDl()">
+  <div class="modal">
+    <div class="modal-emoji">📄</div>
+    <h3 id="dlTitle"></h3>
+    <div class="modal-pages" id="dlPages"></div>
+    <p class="modal-desc" id="dlDesc"></p>
+    <div class="modal-btns">
+      <button class="m-cancel" onclick="closeDl()">Cancel</button>
+      <a class="m-go" id="dlGo" href="#" download onclick="closeDl()">⬇️ Download</a>
+    </div>
+  </div>
+</div>
 
 <footer>
   <p>🙏 Credits: <a href="https://www.facebook.com/nat.wrw" target="_blank">Nat Weerawan</a>, creator of the Oracle concept · <a href="https://www.facebook.com/profile.php?id=61563658892025" target="_blank">ARRA Oracle Community &amp; Conference</a> and everyone in the community</p>
@@ -168,6 +201,18 @@ function toggleMode() {
   document.querySelector('.mode-toggle').textContent = dark ? '☀️' : '🌙'
 }
 if (document.body.classList.contains('dark')) document.querySelector('.mode-toggle').textContent = '☀️'
+
+// download confirm modal: preview first, then confirm/cancel
+const dlModal = document.getElementById('dlModal')
+document.querySelectorAll('.pdf-links .dl').forEach((b) => b.addEventListener('click', () => {
+  document.getElementById('dlTitle').textContent = b.dataset.title
+  document.getElementById('dlPages').textContent = '📄 ' + b.dataset.pages
+  document.getElementById('dlDesc').textContent = b.dataset.desc
+  document.getElementById('dlGo').href = b.dataset.file
+  dlModal.classList.add('open')
+}))
+function closeDl() { dlModal.classList.remove('open') }
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDl() })
 </script>
 </body>
 </html>
